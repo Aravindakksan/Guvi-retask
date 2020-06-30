@@ -1,0 +1,82 @@
+
+-- Inserting data into the films collection
+
+db.films.insertMany([
+	{
+		name:"Vikram Vedha",
+		cast:
+			{
+				actor:"Maddy",
+				s_actor:"vijay_sethu",
+				actress:"shradha"
+			},
+		imdb:8.5,
+		director:"anbu",
+		year:2018
+	},
+	{
+		name:"Nayakan",
+		cast:
+			{
+				actor:"kamal",
+				s_actor:"nassar",
+				actress:"saranya"
+			},
+		imdb:8.3,
+		director:"mani",
+		year:1998
+	},
+	{
+		name:"Anbe sivam",
+		cast:
+			{
+				actor:"kamal",
+				s_actor:"Maddy",
+				actress:"kiran"
+			},
+		imdb:8.2,
+		director:"sundar",
+		year:2003
+	}
+	
+]);
+
+
+-- Inseting data into artists collection
+
+db.artists.insertMany([
+	{
+		name:"Maddy",
+		films_acted:["Anbe sivam","Vikram Vedha"],
+		awards:3
+	},
+	{
+		name:"vijay_sethu",
+		films_acted:["96","Vikram Vedha"],
+		awards:2
+	},
+	{
+		name:"kiran",
+		films_acted:["Anbe sivam","gemini"],
+		awards:2
+	},
+	{
+		name:"nassar",
+		films_acted:["nayakan","thevar magan"],
+		awards:1
+	},
+	{
+		name:"kamal",
+		films_acted:["Anbe sivam","viswaroopam"],
+		awards:5
+	},
+	{
+		name:"vjay",
+		films_acted:["thuppaki","bigil"],
+		awards:4
+	}
+]);
+
+-- show film details
+
+db.films.find().pretty();

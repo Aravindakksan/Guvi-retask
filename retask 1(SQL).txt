@@ -1,0 +1,35 @@
+--Sql Server 2014 Express Edition
+--Batches are separated by 'go'
+
+select @@version as 'sql server version'
+
+-- creation and insertio of Teams table
+
+create table iplTeams(team_id int not null primary key, team_name varchar(20), Bowlers int, Batsmen int, wicket_keepers int, all_rounders int);
+insert into iplTeams values(11,'MI',5,5,2,3);
+insert into iplTeams values(22,'CSK',4,6,1,4);
+insert into iplTeams values(33,'RCB',3,7,2,3);
+insert into iplTeams values(44,'DD',6,4,1,4);
+insert into iplTeams values(55,'KKR',3,7,1,4);
+insert into iplTeams values(66,'RR',5,5,3,2);
+
+-- creation and insertion of players table
+
+create table players(id int not null primary key, t_id int not null foreign key references iplTeams(team_id), player_name varchar(20), role varchar(20), captain varchar(1));
+insert into players values(111,22,'Dhoni','WK', 'y');
+insert into players values(121,11,'Rohit','Batsman', 'y');
+insert into players values(131,55,'Gambir','Batsman', 'y');
+insert into players values(141,55,'Narine','AllRounder', 'n');
+insert into players values(151,33,'kohli','Batsman', 'y');
+insert into players values(161,44,'Shreyas','Batsman', 'y');
+insert into players values(171,66,'Rahane','Batsman', 'y');
+insert into players values(181,11,'Ashwin','Bowler', 'n');
+insert into players values(191,22,'Maling','Bowler', 'n');
+
+go
+create view teamView as
+select iplteams.team_id,iplteams.team_name,players.player_name as captain,iplteams.Bowlers,iplteams.Batsmen,iplteams.wicket_keepers,iplteams.all_rounders from iplTeams
+inner join players on iplteams.team_id=players.t_id
+where players.captain='y';
+go
+select * from teamView;
